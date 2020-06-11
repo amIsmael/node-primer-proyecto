@@ -39,7 +39,7 @@ app.get('/usuario', function (req, res) {
 
                 //para sacar el conteo, podemos pasarle condiciones
                 //Usuario.count ({ google:true / condicion } , (err, conteo) =>{
-                Usuario.countDocuments ({ estado:true } , (err, conteo) =>{
+                Usuario.count ({ estado:true } , (err, conteo) =>{
                     
                     res.json({
                         ok:true,
