@@ -4,6 +4,9 @@ require('./config/config')
 //extensiones
 
 const express = require('express');
+const mongoose = require('mongoose');
+
+
 const app = express();
 
 const bodyParser = require('body-parser');
@@ -14,33 +17,27 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+//estamos haciendo referencia a las rutas para cuando corremos nodemon server/server
+app.use (require('./config/routes/usuario'));
 
-//routes
  
-app.get('/usuario', function (req, res) {
-  res.json('get usuario');
+
+
+//conexión a base de datos
+/*aunque la base de datos no exista podemos realizar la conexión.
+una vez que ingresemos datos, mogoose y mongodb se van a encargar de montar
+toda la estructura
+*/
+
+mongoose.connect(process.env.URLDB, 
+{useNewUrlParser: true, useUnifiedTopology: true});
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+    console.log('está conectado');
 });
 
-app.post('/usuario', function (req, res) {
-    let body =  req.body;
-    res.json({
-        persona:body
-    });
-});
-  
-app.put('/usuario/:id', function (req, res) {
-            //usuario/:parámetro
-    let id = req.params.id;
-                    //parametro
-    res.json({
-        id
-    });
-});
-
-app.delete('/usuario', function (req, res) {
-    res.json('delete usuario');
-});
- 
 app.listen(process.env.PORT, () =>{
     console.log("escuchando puerto:", process.env.PORT);
 });
