@@ -1,9 +1,7 @@
 const express = require('express');
-const app = express();
 
 //para encriptar contraseñas
 const bcrypt = require('bcrypt');
-
 //js con esteroides
 const _ = require('underscore');
 
@@ -11,6 +9,7 @@ const _ = require('underscore');
 const Usuario = require('../models/usuario');
 // se pone con mayúscula por nominglatura, oprque hacemos referencia al objeto 
 
+const app = express();
 
 
 //routes
@@ -24,33 +23,27 @@ app.get('/usuario', function (req, res) {
     limite = Number(limite);
             //Usuario.find({},'qué datos queremos sacarle al arreglo, exclusiones'
     Usuario.find({ estado:true }, 'nombre email role estado google img')
-            .skip(desde)
-            //cuántos registros quieres
-            .limit(limite)
-            .exec( (err, usuarios) =>{
-                
-                if (err) {
-                    return res.status(400).json({
-                        //return nos ayuuda aqui a no seguir identando con else, si error, nos bota alv
-                        ok:false,
-                        err
-                    });
-                }
-
-                //para sacar el conteo, podemos pasarle condiciones
-                //Usuario.count ({ google:true / condicion } , (err, conteo) =>{
-                Usuario.countDocuments ({ estado:true } , (err, conteo) =>{
-                    
-                    res.json({
-                        ok:true,
-                        usuarios,
-                        cuantos: conteo
-                    }); 
-
+        .skip(desde)
+        //cuántos registros quieres
+        .limit(limite)
+        .exec( (err, usuarios) =>{                
+            if (err) {
+                return res.status(400).json({
+                    //return nos ayuuda aqui a no seguir identando con else, si error, nos bota alv
+                    ok:false,
+                    err
                 });
-
-
-            })
+            }
+            //para sacar el conteo, podemos pasarle condiciones
+            //Usuario.count ({ google:true / condicion } , (err, conteo) =>{
+            Usuario.count ({ estado:true } , (err, conteo) =>{                    
+                res.json({
+                    ok:true,
+                    usuarios,
+                    cuantos: conteo
+                }); 
+            });
+        })
 
 });
   
