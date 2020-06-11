@@ -15,12 +15,7 @@ const Usuario = require('../models/usuario');
 
 //routes
 app.get('/usuario', function (req, res) {
-    
-    if(Usuario.estado = true){
         
-    }
-
-    
 //paŕametros opcionales
     let desde = req.query.desde || 0;
     desde = Number(desde);
