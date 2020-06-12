@@ -15,7 +15,7 @@ app.get('/usuario', function(req, res) {
     let desde = req.query.desde || 0;
     desde = Number(desde);
 
-    let limite = req.query.limite || 5;
+    let limite = req.query.limite || 10;
     limite = Number(limite);
 
     Usuario.find({ estado: true }, 'nombre email role estado google img')
@@ -30,7 +30,7 @@ app.get('/usuario', function(req, res) {
                 });
             }
 
-            Usuario.estimatedDocumentCount({ estado: true }, (err, conteo) => {
+            Usuario.countDocuments({ estado: true }, (err, conteo) => {
 
                 res.json({
                     ok: true,

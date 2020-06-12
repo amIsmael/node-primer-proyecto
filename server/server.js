@@ -21,7 +21,7 @@ app.use(require('./routes/usuario'));
 
 
 mongoose.connect(process.env.URLDB, 
-    {useNewUrlParser: true, useUnifiedTopology: true});
+    {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true});
     
     var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error: no se pudo conectar con base de datos'));
