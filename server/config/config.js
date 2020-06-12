@@ -1,26 +1,23 @@
-//var const forma global
-
-//onjeto que corre de forma global en node
-
-/*==================
-    PUERTO
-===================*/
+// ============================
+//  Puerto
+// ============================
 process.env.PORT = process.env.PORT || 3000;
 
-/*==================
-    ENTORNO
-===================*/
+
+// ============================
+//  Entorno
+// ============================
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
-/*==================
-    BASE DE DATOS
-===================*/
-let urlDataBase = '';
 
-if ( process.env.NODE_ENV === 'dev') {
-    urlDataBase = 'mongodb://localhost:27017/cafe'
+// ============================
+//  Base de datos
+// ============================
+let urlDB;
+
+if (process.env.NODE_ENV === 'dev') {
+    urlDB = 'mongodb://localhost:27017/cafe';
 } else {
-    urlDataBase = 'mongodb+srv://cafe-user:KDR7HrAJswPuB8u@cluster0-yhc4c.mongodb.net/cafe?retryWrites=true&w=majority'
+    urlDB = 'mongodb://cafe-user:KDR7HrAJswPuB8u@cluster0-yhc4c.mongodb.net/cafe?retryWrites=true&w=majority';
 }
-
-process.env.URLDB = urlDataBase;
+process.env.URLDB = urlDB;
