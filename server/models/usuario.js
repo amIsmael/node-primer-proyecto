@@ -45,7 +45,6 @@ let usuarioSchema =  new Schema({
 
 /* ya modificamos cuando se imprima mediante un tojson el userSchema */
 usuarioSchema.methods.toJSON = function(){
-    
     let user = this;
     let userObject = user.toObject();
     delete userObject.password;
