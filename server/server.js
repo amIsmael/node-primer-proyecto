@@ -2,24 +2,25 @@ require('./config/config');
 
 const express = require('express');
 const mongoose = require('mongoose');
-
+const path = require('path');
+//path sirve para mandar por segmentos del path y el metodo los arma 
 
 const app = express();
 
 const bodyParser = require('body-parser');
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
+//habilitamos la carpeta public
+//manda segmentos del path y los arma por nosotros
+app.use(express.static(path.resolve(__dirname, '../public')));
 
-app.use(require('./routes/usuario'));
-app.use(require('./routes/login'));
-
-
-
+// Configuración global de rutas
+app.use(require('./routes/index'));
 
 
 mongoose.connect(process.env.URLDB, 
