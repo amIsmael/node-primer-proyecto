@@ -43,7 +43,7 @@ let usuarioSchema =  new Schema({
     }
 });
 
-/* ya modificamos cuando se imprima mediante un tojson el userSchema */
+/* ya modificamos la impresión de datos  mediante un tojson al userSchema */
 usuarioSchema.methods.toJSON = function(){
     let user = this;
     let userObject = user.toObject();

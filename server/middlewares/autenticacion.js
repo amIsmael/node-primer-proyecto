@@ -37,7 +37,7 @@ let verificaToken = ( req, res, next ) => {
 //==========================
 // Verificar AdminRole
 //==========================
-let verifcaAdmin_Role = ( req, res, next ) => {
+let verificaAdmin_Role = ( req, res, next ) => {
 
     //usuario es el mismo que me manden por req
     let usuario = req.usuario;
@@ -48,7 +48,7 @@ let verifcaAdmin_Role = ( req, res, next ) => {
         return res.status(401).json({
             ok:false,
             err: {
-                message: 'NO TIENE CUENTA CON PERMISOS SUFICIENTES PARA ESTA OPERACIÓN'
+                message: 'NO CUENTA CON PERMISOS PARA REALIZAR OPERACIÓN, consulte a su administrador : )'
             }
         });
     }
@@ -61,5 +61,5 @@ let verifcaAdmin_Role = ( req, res, next ) => {
 
 module.exports = {
     verificaToken,
-    verifcaAdmin_Role
+    verificaAdmin_Role
 };
